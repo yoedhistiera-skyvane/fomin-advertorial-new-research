@@ -19,18 +19,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- META PIXEL — uncomment + add PIXEL_ID
+  <!-- META PIXEL — ACTIVE -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'PIXEL_ID'); fbq('track', 'PageView');
+    fbq('init', '813878512909066');
+    fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/></noscript>
-  -->
+    src="https://www.facebook.com/tr?id=813878512909066&ev=PageView&noscript=1"/></noscript>
 
   <!-- GA4 — uncomment + add MEASUREMENT_ID
   <script async src="https://www.googletagmanager.com/gtag/js?id=MEASUREMENT_ID"></script>
@@ -76,13 +76,51 @@
 
     .top-strip { height: 6px; background: linear-gradient(90deg, #BFC9E9 0%, #F4BF8B 100%); }
 
-    .sponsored-label {
+    /* Compelling offer bar (replaces sponsored label) */
+    .offer-bar {
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+    .offer-bar strong { color: var(--peach); font-weight: 700; }
+    .offer-bar .pulse-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+      vertical-align: middle;
+    }
+    .offer-bar .arrow {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform 0.2s;
+    }
+    .offer-bar a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      padding: 2px 0;
+    }
+    .offer-bar a:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 480px) {
+      .offer-bar { font-size: 12px; padding: 9px 14px; }
+    }
+
+    .sponsored-label-tiny {
       background: var(--cream-dark);
       text-align: center;
-      padding: 6px 16px;
-      font-size: 11px;
+      padding: 4px 16px;
+      font-size: 10px;
       color: var(--muted);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 500;
     }
@@ -235,20 +273,53 @@
     }
 
     /* Hero image */
-    .hero-img {
+    /* Hero gallery — e-commerce style with main image + thumbnails */
+    .hero-gallery {
+      margin: 0 0 16px;
+    }
+    .hero-main {
       width: 100%;
       aspect-ratio: 16 / 9;
       object-fit: cover;
       display: block;
-      margin: 0 0 16px;
       background: var(--cream-dark);
+      cursor: zoom-in;
+      transition: opacity 0.2s ease;
+    }
+    .hero-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .hero-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: var(--cream-dark);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .hero-thumb:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .hero-thumb.active {
+      opacity: 1;
+      border-color: var(--indigo);
     }
     .hero-caption {
       font-size: 13px;
       color: var(--muted);
       font-style: italic;
-      margin: 0 0 32px;
+      margin: 14px 0 32px;
       line-height: 1.5;
+    }
+    @media (max-width: 480px) {
+      .hero-thumbs { gap: 6px; }
     }
 
     /* Press strip */
@@ -261,29 +332,34 @@
       border-bottom: 1px solid var(--line);
     }
     .press-strip .label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
+      font-size: 11px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 600;
-      margin: 0 0 14px;
+      color: var(--ink);
+      font-weight: 700;
+      margin: 0 0 18px;
     }
     .press-strip .logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 18px 40px;
+      gap: 24px 56px;
     }
     .press-strip .logos img {
-      height: 30px;
+      height: 38px;
       width: auto;
-      max-width: 140px;
+      max-width: 180px;
       object-fit: contain;
       opacity: 0.85;
       transition: opacity 0.2s ease;
+      filter: grayscale(20%);
     }
-    .press-strip .logos img:hover { opacity: 1; }
+    .press-strip .logos img:hover { opacity: 1; filter: grayscale(0); }
+    @media (max-width: 720px) {
+      .press-strip .logos img { height: 28px; max-width: 130px; }
+      .press-strip .logos { gap: 16px 32px; }
+    }
 
     /* Body copy */
     main p {
@@ -836,51 +912,114 @@
     }
     .copyright { margin-top: 16px; font-size: 13px; color: rgba(255, 255, 255, 0.85); }
 
-    /* Sticky mobile CTA */
+    /* Sticky CTA — Roofus-style with countdown */
     .sticky-cta {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--ink);
-      padding: 12px 16px;
-      display: none;
+      background: #FFFFFF;
+      border-top: 1px solid var(--line);
+      padding: 14px 20px;
+      display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
       z-index: 100;
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(110%);
+      transition: transform 0.35s ease;
+      padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     }
     .sticky-cta.visible { transform: translateY(0); }
-    .sticky-cta .label { color: #fff; font-size: 13px; line-height: 1.3; flex: 1; min-width: 0; }
-    .sticky-cta .label strong { display: block; font-size: 14px; color: #fff; font-weight: 600; }
-    .sticky-cta .label .price-line { color: var(--peach); font-weight: 600; }
-    .sticky-cta .label .strike { color: rgba(255,255,255,0.5); text-decoration: line-through; font-weight: 400; margin-left: 4px; font-size: 12px; }
-    .sticky-cta .btn {
-      background: var(--ocean);
+    .sticky-cta .inner-max {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+    }
+    .sticky-cta .copy {
+      flex: 1;
+      min-width: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+    .sticky-cta .copy .offer-line {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      background: linear-gradient(180deg, transparent 55%, rgba(132, 168, 255, 0.35) 55%);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0 2px;
+      display: inline;
+    }
+    .sticky-cta .copy .meta-line {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .sticky-cta .copy .meta-line .countdown {
+      color: var(--ink);
+      font-weight: 700;
+      background: linear-gradient(180deg, transparent 55%, rgba(132, 168, 255, 0.35) 55%);
+      padding: 0 3px;
+    }
+    .sticky-cta .copy .meta-line .sep {
+      color: var(--line-strong);
+      margin: 0 6px;
+    }
+    .sticky-cta .claim-btn {
+      background: #1FA67A;
       color: #fff;
       text-decoration: none;
-      padding: 10px 18px;
-      font-size: 12px;
+      padding: 14px 28px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
       white-space: nowrap;
-      border: 1px solid var(--ocean);
+      border: none;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .sticky-cta .claim-btn:hover {
+      background: #198E68;
+      transform: translateY(-1px);
+    }
+    .sticky-cta .claim-btn .arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+    .sticky-cta .claim-btn:hover .arrow { transform: translateX(3px); }
+    @media (max-width: 600px) {
+      .sticky-cta { padding: 12px 14px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+      .sticky-cta .inner-max { gap: 12px; }
+      .sticky-cta .copy .offer-line { font-size: 14px; }
+      .sticky-cta .copy .meta-line { font-size: 11px; margin-top: 3px; }
+      .sticky-cta .copy .meta-line .sep { margin: 0 4px; }
+      .sticky-cta .claim-btn { padding: 12px 18px; font-size: 13px; }
+    }
+    @media (max-width: 380px) {
+      .sticky-cta .copy .offer-line { font-size: 13px; }
+      .sticky-cta .claim-btn { padding: 11px 14px; font-size: 12px; }
     }
 
     @media (max-width: 720px) {
       main { padding: 24px 20px 100px; }
       .nav-strip { padding: 10px 20px; gap: 18px; font-size: 11px; }
       .nav-strip a:nth-of-type(n+5) { display: none; }
-      .sticky-cta { display: flex; }
       header.site { padding: 14px 16px; }
       .pub-mark { font-size: 18px; }
       .lists-pair { grid-template-columns: 1fr; padding: 24px 20px; gap: 24px; }
-      .press-strip .logos { gap: 14px 24px; }
-      .press-strip .logos img { height: 24px; max-width: 110px; }
       .byline { gap: 12px; }
       .byline-stats { width: 100%; text-align: left; padding-top: 6px; border-top: 1px dashed var(--line); }
       .cta-block { padding: 26px 20px; margin: 28px 0; }
@@ -901,7 +1040,13 @@
 <body>
 
   <div class="top-strip"></div>
-  <div class="sponsored-label">Advertisement · Sponsored editorial</div>
+  <div class="offer-bar">
+    <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=offer_bar">
+      <span class="pulse-dot"></span>
+      Launch offer: <strong>Save 10%</strong> on Fomin Clean Facial Towels<span class="arrow">→</span>
+    </a>
+  </div>
+  <div class="sponsored-label-tiny">Sponsored editorial</div>
 
   <header class="site">
     <a href="#" class="pub-mark" aria-label="The Skin Files home">
@@ -933,17 +1078,25 @@
         <span class="reviewer">Reviewed for accuracy by licensed estheticians and dermatology references cited below</span>
       </div>
       <div class="byline-stats">
-        <span class="live-readers">2,318 reading now</span>
+        <span class="live-readers" id="liveReaders">847 reading now</span>
       </div>
     </div>
 
-    <!-- HERO IMAGE -->
-    <img class="hero-img" src="images/hero.webp" alt="Clean facial towels on a bathroom counter">
+    <!-- HERO GALLERY: 1 main + 4 thumbnails (e-commerce style) -->
+    <div class="hero-gallery">
+      <img id="heroMain" class="hero-main" src="images/hero.webp" alt="Clean facial towels on a bathroom counter">
+      <div class="hero-thumbs">
+        <img class="hero-thumb active" data-full="images/hero.webp" src="images/hero.webp" alt="Product overview" loading="lazy">
+        <img class="hero-thumb" data-full="images/gallery-2.webp" src="images/gallery-2.webp" alt="In use" loading="lazy">
+        <img class="hero-thumb" data-full="images/gallery-3.webp" src="images/gallery-3.webp" alt="Texture detail" loading="lazy">
+        <img class="hero-thumb" data-full="images/gallery-4.webp" src="images/gallery-4.webp" alt="Travel use" loading="lazy">
+      </div>
+    </div>
     <p class="hero-caption">Our test panel reported visibly calmer skin within seven to ten days of the swap.</p>
 
     <!-- PRESS STRIP -->
     <div class="press-strip">
-      <p class="label">As seen in</p>
+      <p class="label">Featured in</p>
       <div class="logos">
         <img src="https://fominsoap.com/cdn/shop/files/People-Magazine-Logo_1_500x_2_500x.png" alt="People Magazine" loading="lazy">
         <img src="https://fominsoap.com/cdn/shop/files/Frame_1_500x_2_500x.png" alt="Travel + Leisure" loading="lazy">
@@ -1093,25 +1246,25 @@
       <div class="review-card">
         <div class="stars">★★★★★</div>
         <p class="quote">"My daughter suffers with really bad acne. Using wash cloths was only transferring bacteria onto her face. These towels are amazing. Very sturdy and feels great on the skin. We take them wherever we go now."</p>
-        <p class="attr"><strong>Ariana Redmond</strong> · Verified buyer</p>
+        <p class="attr"><strong>Ariana Redmond</strong> · San Diego, CA · Verified buyer</p>
       </div>
 
       <div class="review-card">
         <div class="stars">★★★★★</div>
         <p class="quote">"Perfect for travel and great for removing makeup, these textured towels clean well and yet are soft enough for my sensitive skin. I love having them when I'm out and about and I need something clean to freshen up."</p>
-        <p class="attr"><strong>Maisie Branson</strong> · Verified buyer</p>
+        <p class="attr"><strong>Maisie Branson</strong> · Austin, TX · Verified buyer</p>
       </div>
 
       <div class="review-card">
         <div class="stars">★★★★★</div>
         <p class="quote">"Great swap from old makeup wipes. I will buy these forever. No dyes or other chemicals, so great for sensitive skin. Skin is left super clean, never cause acne. Big enough to cut in half to get more for your money."</p>
-        <p class="attr"><strong>Eliam Winslow</strong> · Verified buyer</p>
+        <p class="attr"><strong>Eliam Winslow</strong> · Portland, OR · Verified buyer</p>
       </div>
 
       <div class="review-card">
         <div class="stars">★★★★★</div>
         <p class="quote">"I bring these face towels with me when I travel and go camping. They work perfectly removing any dirt off my face and neck and I am able to rinse it out and reuse it again. One side works for exfoliating and the other side is smooth for quick wipe down. The towels are very soft and worked great for my sensitive skin. I always keep a few in my car and bag."</p>
-        <p class="attr"><strong>Andrew Bishop</strong> · Verified buyer</p>
+        <p class="attr"><strong>Andrew Bishop</strong> · Denver, CO · Verified buyer</p>
       </div>
     </div>
 
@@ -1223,29 +1376,34 @@
       </p>
       <p class="copyright">© 2026, The Skin Files</p>
       <p class="disclaimer">
-        Statements have not been evaluated by the FDA and are not intended to diagnose, treat, cure, or prevent any disease. Individual results vary. Cited research includes University of Arizona work by Dr. Charles Gerba on household textile contamination and a 2023 study published in <em>Scientific Reports</em> (Nature) on biofilm formation in household textiles. This article is sponsored editorial content produced in partnership with Fomin. Bylines and reader Q&amp;A entries are illustrative; the underlying customer sentiment is drawn from real social channel inquiries.
+        Statements have not been evaluated by the FDA and are not intended to diagnose, treat, cure, or prevent any disease. Individual results vary. Cited research includes University of Arizona work by Dr. Charles Gerba on household textile contamination and a 2023 study published in <em>Scientific Reports</em> (Nature) on biofilm formation in household textiles. This article is sponsored editorial content produced in partnership with Fomin. Bylines and reader Q&amp;A entries are illustrative; the underlying customer sentiment is drawn from real social channel inquiries. Customer review text is verbatim from Fomin's verified buyer reviews; reviewer location details are illustrative.
       </p>
     </div>
   </footer>
 
   <div class="sticky-cta" id="stickyCta">
-    <div class="label">
-      <strong>Clean Facial Towels</strong>
-      <span class="price-line">$10.80 <span class="strike">$12.00</span></span>
+    <div class="inner-max">
+      <div class="copy">
+        <span class="offer-line">Save 10% on Fomin Clean Facial Towels</span>
+        <span class="meta-line">From $10.80 <span class="sep">·</span> 60-day guarantee <span class="sep">·</span> ends in <span class="countdown" id="stickyCountdown">05:00:00</span></span>
+      </div>
+      <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=sticky" class="claim-btn">Claim deal <span class="arrow">→</span></a>
     </div>
-    <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=sticky" class="btn">Shop →</a>
   </div>
 
   <script>
+    // Sticky CTA: appears after 20% of total page scroll
     (function() {
       var sticky = document.getElementById('stickyCta');
       if (!sticky) return;
-      var threshold = 600;
       var ticking = false;
       function onScroll() {
         if (!ticking) {
           window.requestAnimationFrame(function() {
-            if (window.scrollY > threshold) {
+            var totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrolled = window.scrollY;
+            var threshold = totalHeight * 0.20;
+            if (scrolled > threshold) {
               sticky.classList.add('visible');
             } else {
               sticky.classList.remove('visible');
@@ -1256,6 +1414,110 @@
         }
       }
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    })();
+
+    // Countdown timer: 5 hours per session, resets on page refresh
+    // Format: HH:MM:SS · stops at 00:00:00 when expired
+    (function() {
+      var el = document.getElementById('stickyCountdown');
+      if (!el) return;
+
+      // 5 hours from the moment this script runs (per page load)
+      var DURATION_MS = 5 * 60 * 60 * 1000;
+      var sessionStart = new Date();
+      var deadline = new Date(sessionStart.getTime() + DURATION_MS);
+
+      function pad(n) { return n < 10 ? '0' + n : n; }
+
+      function update() {
+        var now = new Date();
+        var diff = deadline - now;
+
+        if (diff <= 0) {
+          el.textContent = '00:00:00';
+          return;
+        }
+
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        el.textContent = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+      }
+
+      update();
+      setInterval(update, 1000);
+    })();
+
+    // Hero gallery: click thumbnail to swap main image
+    (function() {
+      var main = document.getElementById('heroMain');
+      var thumbs = document.querySelectorAll('.hero-thumb');
+      if (!main || !thumbs.length) return;
+      thumbs.forEach(function(thumb) {
+        thumb.addEventListener('click', function() {
+          var fullSrc = thumb.getAttribute('data-full');
+          if (!fullSrc) return;
+          main.src = fullSrc;
+          thumbs.forEach(function(t) { t.classList.remove('active'); });
+          thumb.classList.add('active');
+        });
+      });
+    })();
+
+    // ANIMATED COUNTER — NOT LIVE DATA
+    // Simulates concurrent readers with realistic fluctuation
+    // (random walk within bounds, time-of-day drift, irregular tick intervals)
+    (function() {
+      var el = document.getElementById('liveReaders');
+      if (!el) return;
+
+      // Per-session baseline: pick a starting number between 780 and 1180
+      // so different visitors see different counts on first load
+      var baseline = Math.floor(780 + Math.random() * 400);
+      var current = baseline;
+
+      // Time-of-day modifier: slightly higher numbers during US business hours
+      function getTimeMultiplier() {
+        var hour = new Date().getUTCHours();
+        // US Eastern roughly UTC-5 (or -4 in DST). Peak US daytime ≈ UTC 14-22
+        if (hour >= 14 && hour <= 22) return 1.0;     // peak
+        if (hour >= 12 && hour <= 23) return 0.92;    // shoulder
+        return 0.78;                                   // off-peak
+      }
+
+      // Format with thousands separator
+      function fmt(n) {
+        return n.toLocaleString('en-US');
+      }
+
+      function render() {
+        var display = Math.round(current * getTimeMultiplier());
+        el.textContent = fmt(display) + ' reading now';
+      }
+
+      function tick() {
+        // Random walk: step of -3 to +4, weighted slightly upward
+        var step = Math.floor(Math.random() * 8) - 3;
+        current += step;
+
+        // Bounds: keep within ±25% of baseline so it doesn't drift forever
+        var min = Math.floor(baseline * 0.75);
+        var max = Math.floor(baseline * 1.25);
+        if (current < min) current = min + Math.floor(Math.random() * 5);
+        if (current > max) current = max - Math.floor(Math.random() * 5);
+
+        render();
+
+        // Next tick: 2-5 seconds, irregular
+        var nextTick = 2000 + Math.random() * 3000;
+        setTimeout(tick, nextTick);
+      }
+
+      render();
+      // First tick after a short pause so initial number is visible briefly
+      setTimeout(tick, 1500);
     })();
   </script>
 
