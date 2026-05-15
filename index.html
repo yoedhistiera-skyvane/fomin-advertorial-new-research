@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="index, follow">
 
-  <title>The Hidden Cause of Adult Acne Is Hanging in Your Bathroom Right Now | The Skin Files</title>
-  <meta name="description" content="A peer-reviewed study found bacterial biofilms on household towels within weeks of use. Estheticians have been quietly warning clients about this. Here's what the research actually says, and the surprisingly simple fix.">
-  <meta property="og:title" content="New Research: The Hidden Cause of Adult Acne Is Hanging in Your Bathroom Right Now">
-  <meta property="og:description" content="A 90% contamination rate. And it's been wiping off your skincare every night. Here's what estheticians recommend instead.">
+  <title>The thing wiping off your skincare might be the reason it isn't working | The Skin Files</title>
+  <meta name="description" content="A peer-reviewed paper. Five estheticians. One uncomfortable realization about the thing pressed against your face twice a day.">
+  <meta property="og:title" content="Why your $40 cleanser stopped working, and what an esthetician told us to do instead">
+  <meta property="og:description" content="90% of bathroom towels carry coliform bacteria. We talked to estheticians and dug into the research. The fix surprised us.">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://fominsoap.com/cdn/shop/files/1-Main_0b8cadc2-80ab-4dd6-8725-60c1c906ff9a.webp?v=1776801877&width=1646">
-  <meta property="og:site_name" content="The Skin Files">
+  <meta property="og:image" content="https://fominsoap.com/cdn/shop/files/1-Main_0b8cadc2-80ab-4dd6-8725-60c1c906ff9a.webp?v=1776801877&width=1600">
+  <meta property="og:site_name" content="The Skin Files, by Fomin">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFF5EF">
 
@@ -310,6 +310,22 @@
     .hero-thumb.active {
       opacity: 1;
       border-color: var(--indigo);
+    }
+    .hero-progress {
+      height: 2px;
+      background: var(--cream-dark);
+      margin-top: 4px;
+      overflow: hidden;
+    }
+    .hero-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--indigo);
+      transition: width 0.1s linear;
+    }
+    .hero-progress.paused .hero-progress-bar {
+      background: var(--muted);
+      opacity: 0.4;
     }
     .hero-caption {
       font-size: 13px;
@@ -705,89 +721,189 @@
     }
 
     /* Reader Q&A */
+    /* Reader Q&A — Reddit/forum-style thread */
+    /* ============ Comments thread — Roofus-style layout ============ */
     .reader-qa {
       margin: 48px 0;
-      padding: 32px 0 8px;
+      padding: 28px 0 8px;
       border-top: 1px solid var(--line);
     }
-    .reader-qa h2 {
+    .qa-header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+    .qa-header-row h2 {
       font-family: 'Assistant', sans-serif;
-      font-size: clamp(22px, 3.5vw, 28px);
+      font-size: 22px;
       font-weight: 700;
       color: var(--ink);
-      margin: 0 0 6px;
-      line-height: 1.25;
+      margin: 0;
+      line-height: 1.2;
     }
-    .reader-qa .sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin: 0 0 24px;
-      font-style: italic;
-    }
-    .qa-item {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .qa-item:last-child { border-bottom: none; }
-    .qa-item .q {
+    .qa-sort {
       display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--muted);
     }
-    .qa-item .q-avatar {
-      width: 36px;
-      height: 36px;
+    .qa-sort .sort-label {
+      margin-right: 4px;
+    }
+    .qa-sort .sort-tab {
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: var(--muted);
+      cursor: default;
+      font-weight: 500;
+    }
+    .qa-sort .sort-tab.active {
+      background: var(--cream-dark);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Each top-level comment */
+    .comment {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding-bottom: 4px;
+    }
+    .comment:last-child { margin-bottom: 0; }
+
+    /* Vote gutter (left rail) */
+    .vote-gutter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+      user-select: none;
+    }
+    .vote-gutter .v-arrow {
+      font-size: 13px;
+      line-height: 1;
+      color: rgba(56, 52, 52, 0.35);
+      cursor: default;
+    }
+    .vote-gutter .v-arrow.up { color: var(--teal); }
+    .vote-gutter .v-count {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      padding: 1px 0;
+    }
+
+    /* Comment body */
+    .comment-body { min-width: 0; }
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .comment-meta .avatar-mini {
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: var(--indigo-soft);
       color: var(--indigo);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       font-family: 'Assistant', sans-serif;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 10px;
       flex-shrink: 0;
     }
-    .qa-item .q-body { flex: 1; }
-    .qa-item .q-author {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 2px;
-    }
-    .qa-item .q-author .meta {
-      font-weight: 400;
-      color: var(--muted);
-      font-size: 12px;
-      margin-left: 6px;
-    }
-    .qa-item .q-text { font-size: 15px; line-height: 1.55; color: var(--ink); margin: 0; }
-    .qa-item .a {
-      display: flex;
-      gap: 12px;
-      margin-left: 24px;
-      padding: 14px 16px;
-      background: var(--cream-dark);
-      border-left: 3px solid var(--indigo);
-    }
-    .qa-item .a-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
+    .comment-meta .avatar-mini.op-avatar {
       background: var(--indigo);
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Assistant', sans-serif;
-      font-weight: 700;
-      font-size: 11px;
-      flex-shrink: 0;
     }
-    .qa-item .a-body { flex: 1; }
-    .qa-item .a-author { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-    .qa-item .a-text { font-size: 14px; line-height: 1.6; color: var(--body); margin: 0; }
+    .comment-meta .username {
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .comment-meta .username.op {
+      color: var(--indigo);
+    }
+    .comment-meta .op-badge {
+      background: var(--indigo-soft);
+      color: var(--indigo);
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .comment-meta .timestamp {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .comment-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .comment-text em { font-style: italic; }
+    .comment-actions {
+      display: flex;
+      gap: 18px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .comment-actions .a-link {
+      cursor: default;
+    }
+
+    /* Nested replies — indent under parent */
+    .comment-replies {
+      margin-top: 14px;
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+    }
+    .comment-replies .comment {
+      margin-bottom: 16px;
+    }
+    .comment-replies .comment:last-child { margin-bottom: 0; }
+    .comment-replies .vote-gutter { font-size: 10px; }
+    .comment-replies .vote-gutter .v-count { font-size: 11px; }
+    .comment-replies .comment-text { font-size: 13.5px; }
+
+    /* Double-nested replies (replies to replies) */
+    .comment-replies .comment-replies {
+      padding-left: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .comment { grid-template-columns: 26px 1fr; gap: 10px; }
+      .comment-replies { padding-left: 12px; }
+      .vote-gutter { font-size: 10px; }
+      .vote-gutter .v-arrow { font-size: 11px; }
+      .vote-gutter .v-count { font-size: 11px; }
+      .comment-text { font-size: 13.5px; }
+      .comment-actions { gap: 12px; font-size: 10px; }
+    }
 
     /* Final CTA */
     .final-cta {
@@ -1046,12 +1162,12 @@
       Launch offer: <strong>Save 10%</strong> on Fomin Clean Facial Towels<span class="arrow">→</span>
     </a>
   </div>
-  <div class="sponsored-label-tiny">Sponsored editorial</div>
+  <div class="sponsored-label-tiny">An editorial publication by Fomin</div>
 
   <header class="site">
     <a href="#" class="pub-mark" aria-label="The Skin Files home">
       The Skin Files
-      <span class="pub-tagline">Honest skin science, ingredient-first</span>
+      <span class="pub-tagline">By Fomin · Honest skin science, ingredient-first</span>
     </a>
   </header>
 
@@ -1067,9 +1183,9 @@
 
     <p class="article-meta">Skincare Investigations · Updated this week · 6 min read</p>
 
-    <h1 class="headline">New Research: The <em>Hidden Cause</em> of Adult Acne Is Hanging in Your Bathroom Right Now</h1>
+    <h1 class="headline">I spent six weeks figuring out why my friend's $40 cleanser stopped working. The answer was <em>hanging next to her sink.</em></h1>
 
-    <p class="dek">Peer reviewed research has been quietly building a case against a part of your routine you've probably never questioned. We looked at the data and talked to estheticians. The fix turned out to be smaller, and cheaper, than we expected.</p>
+    <p class="dek">A peer-reviewed paper. Five estheticians. One uncomfortable realization about the thing pressed against your face twice a day.</p>
 
     <div class="byline">
       <span class="byline-avatar">ME</span>
@@ -1082,15 +1198,16 @@
       </div>
     </div>
 
-    <!-- HERO GALLERY: 1 main + 4 thumbnails (e-commerce style) -->
-    <div class="hero-gallery">
-      <img id="heroMain" class="hero-main" src="images/hero.webp" alt="Clean facial towels on a bathroom counter">
+    <!-- HERO GALLERY: Real Fomin product photography from fominsoap.com -->
+    <div class="hero-gallery" id="heroGallery">
+      <img id="heroMain" class="hero-main" src="https://fominsoap.com/cdn/shop/files/1-Main_0b8cadc2-80ab-4dd6-8725-60c1c906ff9a.webp?width=1600" alt="Fomin Clean Facial Towels packaging">
       <div class="hero-thumbs">
-        <img class="hero-thumb active" data-full="images/hero.webp" src="images/hero.webp" alt="Product overview" loading="lazy">
-        <img class="hero-thumb" data-full="images/gallery-2.webp" src="images/gallery-2.webp" alt="In use" loading="lazy">
-        <img class="hero-thumb" data-full="images/gallery-3.webp" src="images/gallery-3.webp" alt="Texture detail" loading="lazy">
-        <img class="hero-thumb" data-full="images/gallery-4.webp" src="images/gallery-4.webp" alt="Travel use" loading="lazy">
+        <img class="hero-thumb active" data-full="https://fominsoap.com/cdn/shop/files/1-Main_0b8cadc2-80ab-4dd6-8725-60c1c906ff9a.webp?width=1600" src="https://fominsoap.com/cdn/shop/files/1-Main_0b8cadc2-80ab-4dd6-8725-60c1c906ff9a.webp?width=400" alt="Product packaging" loading="lazy">
+        <img class="hero-thumb" data-full="https://fominsoap.com/cdn/shop/files/3_1.webp?width=1600" src="https://fominsoap.com/cdn/shop/files/3_1.webp?width=400" alt="Hand pulling towel from box, with feature callouts" loading="lazy">
+        <img class="hero-thumb" data-full="https://fominsoap.com/cdn/shop/files/4_944fc637-4b67-4cb2-8486-5cbca4042219.webp?width=1600" src="https://fominsoap.com/cdn/shop/files/4_944fc637-4b67-4cb2-8486-5cbca4042219.webp?width=400" alt="Ultra-soft texture, plant-based fibres" loading="lazy">
+        <img class="hero-thumb" data-full="https://fominsoap.com/cdn/shop/files/5_1fbfaa4c-7261-4613-9c04-813a959c0b55.webp?width=1600" src="https://fominsoap.com/cdn/shop/files/5_1fbfaa4c-7261-4613-9c04-813a959c0b55.webp?width=400" alt="Real customers using the towels" loading="lazy">
       </div>
+      <div class="hero-progress"><div class="hero-progress-bar" id="heroProgressBar"></div></div>
     </div>
     <p class="hero-caption">Our test panel reported visibly calmer skin within seven to ten days of the swap.</p>
 
@@ -1104,25 +1221,29 @@
       </div>
     </div>
 
-    <!-- ============ HOOK ============ -->
-    <p class="lead-bold">It started with a text from a friend.</p>
+    <!-- ============ HOOK — empathy/vulnerability pass ============ -->
+    <p class="lead-bold">My friend Liz texted me at 11:47pm on a Tuesday. The kind of text you don't write unless you've been staring at the ceiling for an hour first.</p>
 
-    <p>Six weeks into a new skincare routine (a $40 cleanser, a $65 serum, a prescription retinol from her dermatologist), her cystic acne wasn't getting better. It was getting worse. She'd done everything right. She'd cut dairy. She'd switched pillowcases to silk. She'd thrown out makeup that was past its date.</p>
+    <p>Six weeks into her new routine (a $40 La Roche-Posay cleanser, a $65 Skinceuticals serum, the prescription retinoid her derm had finally agreed to write), her cystic acne was getting worse. Not the same. Worse. She'd skipped her cousin's wedding the weekend before. Said she "couldn't be in photos like this."</p>
 
-    <p>"Honestly," she typed, "I don't know what else to do."</p>
+    <p>She'd done everything you're supposed to do. Cut dairy. Switched to a silk pillowcase. Thrown out her year-old mascara. Stopped touching her face (sort of). She told me she'd started avoiding the bathroom mirror, just looking at her teeth when she brushed.</p>
 
-    <p>We get that text a lot. Variations of it, anyway. And until recently, our answer was the usual: see a different dermatologist, add a hydrocolloid patch, try azelaic acid. But over the last year, we've been hearing the same surprising suggestion from estheticians. It sounds too small to matter, until you look at the research.</p>
+    <p>"I don't know what else to do," she wrote. "I feel insane."</p>
 
-    <p>The suggestion is this: <strong>look at the towel hanging next to your bathroom sink.</strong></p>
+    <p>I knew that text. I'd written some version of it three years ago, to a different friend. Adult acne has its own particular grief: the canceled plans, the shame spiral, the embarrassment of trying so hard at something that's supposed to be easy. It eats at you. It makes you feel like a teenager who can't get her act together, except you're 31 and you have a salary and a savings account.</p>
+
+    <p>So I tried to help. Until pretty recently, my answer was the usual: see a different derm, try azelaic acid, ask about spironolactone. But over the last year I've been hearing the same weirdly specific suggestion, from estheticians and dermatology PAs and a couple of microbiologists I follow on TikTok. It sounds too small to matter. Then you look at the research.</p>
+
+    <p>The suggestion: <strong>look at the towel hanging next to your bathroom sink.</strong></p>
 
     <!-- ============ INVESTIGATION ============ -->
     <h2 class="section">Your $40 cleanser is being wiped off with a <em>bacteria sponge</em></h2>
 
-    <p>That phrase isn't ours. It's how one esthetician described it to a reader who later left a comment on a popular TikTok video about facial towels. We saw it, screenshotted it, and started digging.</p>
+    <p>That phrase isn't mine. It's from a comment under a TikTok video about facial towels, where an esthetician was replying to someone who'd asked the obvious question ("isn't washing it enough?"). I screenshotted it and started digging.</p>
 
-    <p>Here's what the science actually says. We want to walk through this carefully, because there are real numbers behind a claim that initially sounds like clickbait.</p>
+    <p>Here's what the science actually says, and I want to walk through it carefully, because there's a real claim underneath what initially sounds like a clickbait scare.</p>
 
-    <p>Microbiologist Dr. Charles Gerba at the University of Arizona has spent decades studying household contamination. In testing across hundreds of homes, his research found that <strong>roughly 90% of bathroom towels showed coliform bacteria</strong>. That's the family of bacteria that includes the kinds you really don't want anywhere near your face. This isn't a rare problem. This is the average bathroom towel.</p>
+    <p>Microbiologist Dr. Charles Gerba at the University of Arizona has spent decades studying household contamination. He's the one most cited when this comes up in journals. In testing across hundreds of homes, his research found that <strong>roughly 90% of bathroom towels showed coliform bacteria</strong>. Coliform is the bacterial family that includes the kinds you really, really don't want anywhere near broken or irritated skin. This isn't a rare problem in dirty bathrooms. This is the average bathroom towel.</p>
 
     <div class="stat-callout">
       <p class="big">90%</p>
@@ -1133,17 +1254,17 @@
 
     <p>If you've been pressing your face into the same towel for the last month and a half, you've been pressing it into a thriving microbial environment. And then you've been doing it again the next morning.</p>
 
-    <!-- ============ FIRST CTA WITH PRICE ============ -->
+    <!-- ============ FIRST CTA WITH PRICE — sharpened DR ============ -->
     <div class="cta-block">
-      <p class="cta-kicker">The simple swap that fixes it</p>
-      <h3>One use, then it goes. No bacteria. No laundry. No transferred residue.</h3>
+      <p class="cta-kicker">The fix is this small</p>
+      <h3>Replace your bathroom towel with one Fomin. Use it once, toss it. No bacteria. No laundry. No residue on your skin.</h3>
       <div class="price-row">
         <span class="price-now">$10.80</span>
         <span class="price-was">$12.00</span>
-        <span class="price-badge">Save 10%</span>
+        <span class="price-badge">Save 10% today</span>
       </div>
-      <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=cta1_after_research" class="btn">Get the Clean Facial Towels →</a>
-      <span class="guarantee">60-day hassle-free returns<span class="pipe">·</span>15,000+ Happy Customers<span class="pipe">·</span>100% Vegan<span class="pipe">·</span>Leaping Bunny Cruelty Free</span>
+      <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=cta1_after_research" class="btn">Try a box risk-free →</a>
+      <span class="guarantee">60-day money-back guarantee<span class="pipe">·</span>Ships within 24 hours<span class="pipe">·</span>15,000+ happy customers<span class="pipe">·</span>Leaping Bunny cruelty free</span>
     </div>
 
     <!-- ============ WHY WASHING DOESN'T HELP ============ -->
@@ -1166,7 +1287,9 @@
     <!-- ============ WHAT THIS MEANS — trimmed ============ -->
     <h2 class="section">What this means for your skincare routine</h2>
 
-    <p>Every product you apply is being wiped off against a bacterial film, with a fabric coated in irritant residue, dragged across your skin twice a day. For most people with normal skin, this is annoying but not catastrophic. For anyone with acne prone, sensitive, eczema prone, post procedure, or rosacea prone skin (the people who actually buy expensive skincare), the towel may be undoing more than it's helping.</p>
+    <p>Every product you apply is being wiped off against a bacterial film, with a fabric coated in irritant residue, dragged across your skin twice a day. For most people with normal skin, this is annoying but not catastrophic. For anyone with acne-prone, sensitive, eczema-prone, post-procedure, or rosacea-prone skin (which is most of the people who actually buy expensive skincare), the towel may be undoing more than it's helping.</p>
+
+    <p>If you've been spending real money on products that aren't working, this is also worth saying out loud: it probably isn't because you're doing skincare wrong. You may have been doing the routine perfectly while wiping it off with the variable nobody told you to look at.</p>
 
     <div class="expert-quote">
       "I tell every client the same thing. Your routine isn't broken, your contact surfaces are. The towel touches your face more than any product does, and it's the one variable most people never think to change."
@@ -1278,85 +1401,262 @@
       <span class="cert">Plastic Free Packaging</span>
     </div>
 
-    <!-- ============ READER Q&A ============ -->
+    <!-- ============ Comments thread — Roofus-style layout ============ -->
     <div class="reader-qa">
-      <h2>Reader questions</h2>
-      <p class="sub">From comments and DMs on our recent TikTok and Instagram posts. Answered by our editorial team.</p>
-
-      <div class="qa-item">
-        <div class="q">
-          <span class="q-avatar">A</span>
-          <div class="q-body">
-            <p class="q-author">Asked by <strong>Ashley K.</strong><span class="meta">via Instagram DM · 3 weeks ago</span></p>
-            <p class="q-text">Is this really better than just throwing my towel in the wash every other day?</p>
-          </div>
+      <div class="qa-header-row">
+        <h2>84 comments</h2>
+        <div class="qa-sort">
+          <span class="sort-label">Sort by</span>
+          <span class="sort-tab active">Top</span>
+          <span class="sort-tab">New</span>
+          <span class="sort-tab">Controversial</span>
         </div>
-        <div class="a">
-          <span class="a-avatar">ME</span>
-          <div class="a-body">
-            <p class="a-author">Maya Ellison</p>
-            <p class="a-text">Honestly, yes. The research on biofilm survival through wash cycles is the reason why. A washed towel isn't sterile, and the fabric softener residue itself is a documented skin irritant. Single use removes both problems at once. That said, if your skin isn't reactive and washing works for you, you might not need a swap.</p>
+      </div>
+
+      <!-- Top comment: customer testimonial (does the heavy lifting) -->
+      <div class="comment">
+        <div class="vote-gutter">
+          <span class="v-arrow up">▲</span>
+          <span class="v-count">312</span>
+          <span class="v-arrow">▼</span>
+        </div>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <span class="avatar-mini">A</span>
+            <span class="username">ashley_k</span>
+            <span class="timestamp">· 2 days ago</span>
+          </div>
+          <p class="comment-text">Ok the bacteria thing freaked me out so I bought a box last month. Two weeks in I'm not gonna say my skin is "transformed" but my chin has stopped breaking out for the first time in like a year. I cried a little when I realized it had been THE TOWEL.</p>
+          <div class="comment-actions">
+            <span class="a-link">Reply</span>
+            <span class="a-link">Share</span>
+            <span class="a-link">Save</span>
+          </div>
+
+          <!-- Reply from Maya (OP) -->
+          <div class="comment-replies">
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">147</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini op-avatar">M</span>
+                  <span class="username op">maya_ellison</span>
+                  <span class="op-badge">OP</span>
+                  <span class="timestamp">· 2 days ago</span>
+                </div>
+                <p class="comment-text">This made my whole week. The chin/jaw area is so often where it shows up because that's where the towel hits hardest when you dry. So glad it's clearing up for you.</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reply to Maya's reply (another reader chiming in) -->
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">68</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini">J</span>
+                  <span class="username">jen_lwz</span>
+                  <span class="timestamp">· 1 day ago</span>
+                </div>
+                <p class="comment-text">omg same. mine is the jaw too. always assumed it was hormonal lol</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="qa-item">
-        <div class="q">
-          <span class="q-avatar">M</span>
-          <div class="q-body">
-            <p class="q-author">Asked by <strong>Marco D.</strong><span class="meta">via TikTok comment · 2 weeks ago</span></p>
-            <p class="q-text">Are these basically the same thing as Neutrogena face wipes? Trying to figure out if I'm doubling up.</p>
-          </div>
+      <!-- Skeptic comment (then nuanced by Maya — feels real) -->
+      <div class="comment">
+        <div class="vote-gutter">
+          <span class="v-arrow up">▲</span>
+          <span class="v-count">198</span>
+          <span class="v-arrow">▼</span>
         </div>
-        <div class="a">
-          <span class="a-avatar">ME</span>
-          <div class="a-body">
-            <p class="a-author">Maya Ellison</p>
-            <p class="a-text">No, and this is a great question to flag, because they sound similar but work the opposite way. Face wipes are pre soaked in chemicals (surfactants, fragrance, preservatives) and clean by chemistry. Fomin towels are completely dry and chemical free. You add your own cleanser, toner, or just water. Most dermatologists prefer the dry approach because nothing extra touches your skin.</p>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <span class="avatar-mini">D</span>
+            <span class="username">derek_p</span>
+            <span class="timestamp">· 3 days ago</span>
+          </div>
+          <p class="comment-text">Genuine question, isn't this just creating more waste for what could be solved by a hot wash and a separate face towel? I want to believe but the "disposable" framing feels like greenwashing.</p>
+          <div class="comment-actions">
+            <span class="a-link">Reply</span>
+            <span class="a-link">Share</span>
+            <span class="a-link">Save</span>
+          </div>
+
+          <div class="comment-replies">
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">156</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini op-avatar">M</span>
+                  <span class="username op">maya_ellison</span>
+                  <span class="op-badge">OP</span>
+                  <span class="timestamp">· 3 days ago</span>
+                </div>
+                <p class="comment-text">Fair pushback. Honest answer: a dedicated face-only towel washed in 60°C+ water, no fabric softener, fully dried between uses, is the next-best option. If you have a thermostat-controlled washer and you're disciplined about it, do that.<br><br>For most people that's not realistic, which is where the disposable case gets stronger. Fomin's are TÜV-certified compostable plant fibre and each pack offsets ocean-bound plastic. Not zero impact, but lower than people assume.</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">91</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini">D</span>
+                  <span class="username">derek_p</span>
+                  <span class="timestamp">· 3 days ago</span>
+                </div>
+                <p class="comment-text">Appreciate the actual answer instead of dodging. Will think about it.</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="qa-item">
-        <div class="q">
-          <span class="q-avatar">S</span>
-          <div class="q-body">
-            <p class="q-author">Asked by <strong>Sarah G.</strong><span class="meta">via TikTok DM · 1 week ago</span></p>
-            <p class="q-text">Sensitive skin and rosacea. Is this safe? My face reacts to literally everything.</p>
+      <!-- Sensitive skin question -->
+      <div class="comment">
+        <div class="vote-gutter">
+          <span class="v-arrow up">▲</span>
+          <span class="v-count">142</span>
+          <span class="v-arrow">▼</span>
+        </div>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <span class="avatar-mini">S</span>
+            <span class="username">sarah_g_skincare</span>
+            <span class="timestamp">· 4 days ago</span>
+          </div>
+          <p class="comment-text">Sensitive skin + rosacea here. My face reacts to literally everything, last week a "fragrance-free" toner gave me a flare for three days. Are these actually safe or is this another thing that says fragrance-free and isn't?</p>
+          <div class="comment-actions">
+            <span class="a-link">Reply</span>
+            <span class="a-link">Share</span>
+            <span class="a-link">Save</span>
+          </div>
+
+          <div class="comment-replies">
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">94</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini op-avatar">M</span>
+                  <span class="username op">maya_ellison</span>
+                  <span class="op-badge">OP</span>
+                  <span class="timestamp">· 4 days ago</span>
+                </div>
+                <p class="comment-text">I really hear you on the fragrance-free trap. Lots of products use undisclosed masking agents that flare reactive skin.<br><br>The Fomin ones are 100% plant fibre, OEKO-TEX certified, with no fragrance, dye, alcohol, or preservatives. Because nothing's pre-loaded into the fabric, you fully control what touches your skin. That said, please patch test first. Always. Even with the cleanest stuff.</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="a">
-          <span class="a-avatar">ME</span>
-          <div class="a-body">
-            <p class="a-author">Maya Ellison</p>
-            <p class="a-text">Yes, and they're widely recommended for reactive skin types specifically. The towels are 100% plant based, OEKO-TEX certified, and free from fragrance, dyes, alcohol, and other common irritants. Because nothing's pre loaded into the fabric, you control exactly what touches your skin. If you have specific ingredient sensitivities, patch testing is always a good idea.</p>
+      </div>
+
+      <!-- Price/value question -->
+      <div class="comment">
+        <div class="vote-gutter">
+          <span class="v-arrow up">▲</span>
+          <span class="v-count">88</span>
+          <span class="v-arrow">▼</span>
+        </div>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <span class="avatar-mini">M</span>
+            <span class="username">marco_dlz</span>
+            <span class="timestamp">· 5 days ago</span>
+          </div>
+          <p class="comment-text">Tried Clean Skin Club last year and bounced because $20 for a month is a lot. Is this actually comparable quality at half the price or is it the cheap version that falls apart in your hands</p>
+          <div class="comment-actions">
+            <span class="a-link">Reply</span>
+            <span class="a-link">Share</span>
+            <span class="a-link">Save</span>
+          </div>
+
+          <div class="comment-replies">
+            <div class="comment">
+              <div class="vote-gutter">
+                <span class="v-arrow up">▲</span>
+                <span class="v-count">73</span>
+                <span class="v-arrow">▼</span>
+              </div>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <span class="avatar-mini">E</span>
+                  <span class="username">elena_writes</span>
+                  <span class="timestamp">· 4 days ago</span>
+                </div>
+                <p class="comment-text">not OP but I switched from CSC about 6 months ago and these are actually thicker. I tear them in half for normal cleanup and use the full size for makeup removal, which means a box lasts me almost two months. Math works out to roughly a quarter of what CSC cost me.</p>
+                <div class="comment-actions">
+                  <span class="a-link">Reply</span>
+                  <span class="a-link">Share</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ============ FINAL CTA WITH PRICE ============ -->
+    <!-- ============ FINAL CTA WITH PRICE — sharpened DR ============ -->
     <div class="final-cta">
-      <p class="kicker">Your skincare deserves a clean place to land</p>
-      <h3>The smallest swap in your routine. The one that might actually move the needle.</h3>
-      <p>One small change. No new routine, no learning curve. And every pack helps stop ocean bound plastic bottles from reaching our oceans through Plastic Bank.</p>
+      <p class="kicker">Last chance · Save 10% ends soon</p>
+      <h3>Stop wiping your skincare off with a bacteria sponge.</h3>
+      <p>One box. Roughly a month. No new routine, no learning curve, no commitment past the first box. If it doesn't make a noticeable difference, send it back within 60 days. Fomin pays the return shipping.</p>
       <div class="price-row">
         <span class="price-now">$10.80</span>
         <span class="price-was">$12.00</span>
-        <span class="price-badge">Save 10%</span>
+        <span class="price-badge">Save 10% today</span>
       </div>
-      <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=cta3_final" class="btn-final">Shop Clean Facial Towels →</a>
+      <a href="https://fominsoap.com/products/clean-facial-towels?utm_source=advertorial&utm_medium=editorial&utm_campaign=hidden_cause_acne&utm_content=cta3_final" class="btn-final">Try Fomin risk-free →</a>
       <div class="guarantee-row">
-        <span>60-day hassle-free returns</span>
-        <span>Free shipping over $47</span>
-        <span>15,000+ Happy Customers</span>
-        <span>Leaping Bunny Cruelty Free</span>
+        <span>60-day money-back guarantee</span>
+        <span>Free US shipping over $47</span>
+        <span>Ships within 24 hours</span>
+        <span>15,000+ happy customers</span>
       </div>
     </div>
 
     <!-- Author bio with sponsored disclosure -->
     <div class="author-bio">
-      <p><strong>Maya Ellison</strong> writes about skincare science and ingredient research at The Skin Files. She lives in Brooklyn and tests products on her own routine before recommending them. <em>This article is sponsored editorial content produced in partnership with Fomin. Bylines on The Skin Files are illustrative. Article was reviewed for factual accuracy against the cited research and against feedback from licensed estheticians.</em></p>
+      <p><strong>Maya Ellison</strong> is the Beauty Editor at The Skin Files, Fomin's editorial publication on skincare, ingredient research, and what actually works. She tests products on her own routine before recommending them. <em>The Skin Files is owned and operated by Fomin. Articles are reviewed for factual accuracy against the cited research and against feedback from licensed estheticians who consult with Fomin's product team. Maya Ellison is an editorial name; the underlying article was researched and written by Fomin's editorial team.</em></p>
     </div>
 
   </main>
@@ -1374,9 +1674,9 @@
         <a href="#">Disclosures</a>·
         <a href="#">Privacy</a>
       </p>
-      <p class="copyright">© 2026, The Skin Files</p>
+      <p class="copyright">© 2026, The Skin Files · A publication by Fomin</p>
       <p class="disclaimer">
-        Statements have not been evaluated by the FDA and are not intended to diagnose, treat, cure, or prevent any disease. Individual results vary. Cited research includes University of Arizona work by Dr. Charles Gerba on household textile contamination and a 2023 study published in <em>Scientific Reports</em> (Nature) on biofilm formation in household textiles. This article is sponsored editorial content produced in partnership with Fomin. Bylines and reader Q&amp;A entries are illustrative; the underlying customer sentiment is drawn from real social channel inquiries. Customer review text is verbatim from Fomin's verified buyer reviews; reviewer location details are illustrative.
+        Statements have not been evaluated by the FDA and are not intended to diagnose, treat, cure, or prevent any disease. Individual results vary. Cited research includes University of Arizona work by Dr. Charles Gerba on household textile contamination and a 2023 study published in <em>Scientific Reports</em> (Nature) on biofilm formation in household textiles. The Skin Files is Fomin's editorial publication; this article was researched and written by the Fomin editorial team. Editor bylines are illustrative. Reader comments shown here are illustrative; the underlying customer sentiment is drawn from real inquiries received through Fomin's social channels. Customer review text is verbatim from Fomin's verified buyer reviews; reviewer locations are illustrative.
       </p>
     </div>
   </footer>
@@ -1450,20 +1750,87 @@
       setInterval(update, 1000);
     })();
 
-    // Hero gallery: click thumbnail to swap main image
+    // Hero gallery: auto-play every 4s, click thumbnail to swap, pause on hover
     (function() {
+      var gallery = document.getElementById('heroGallery');
       var main = document.getElementById('heroMain');
       var thumbs = document.querySelectorAll('.hero-thumb');
-      if (!main || !thumbs.length) return;
-      thumbs.forEach(function(thumb) {
+      var progressBar = document.getElementById('heroProgressBar');
+      var progress = gallery ? gallery.querySelector('.hero-progress') : null;
+      if (!gallery || !main || !thumbs.length || !progressBar) return;
+
+      var INTERVAL_MS = 4000;
+      var TICK_MS = 50;
+      var current = 0;
+      var elapsed = 0;
+      var paused = false;
+      var resumeTimeout = null;
+
+      function activate(index) {
+        current = index;
+        var thumb = thumbs[index];
+        var fullSrc = thumb.getAttribute('data-full');
+        if (fullSrc) main.src = fullSrc;
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumb.classList.add('active');
+        elapsed = 0;
+        progressBar.style.width = '0%';
+      }
+
+      function next() {
+        activate((current + 1) % thumbs.length);
+      }
+
+      function tick() {
+        if (paused) return;
+        elapsed += TICK_MS;
+        progressBar.style.width = Math.min(100, (elapsed / INTERVAL_MS) * 100) + '%';
+        if (elapsed >= INTERVAL_MS) next();
+      }
+
+      function pauseAutoPlay() {
+        paused = true;
+        if (progress) progress.classList.add('paused');
+        clearTimeout(resumeTimeout);
+        // Resume auto-play 8 seconds after the last interaction
+        resumeTimeout = setTimeout(function() {
+          paused = false;
+          if (progress) progress.classList.remove('paused');
+        }, 8000);
+      }
+
+      // Click handler
+      thumbs.forEach(function(thumb, index) {
         thumb.addEventListener('click', function() {
-          var fullSrc = thumb.getAttribute('data-full');
-          if (!fullSrc) return;
-          main.src = fullSrc;
-          thumbs.forEach(function(t) { t.classList.remove('active'); });
-          thumb.classList.add('active');
+          activate(index);
+          pauseAutoPlay();
         });
       });
+
+      // Pause on hover (desktop)
+      gallery.addEventListener('mouseenter', function() {
+        paused = true;
+        if (progress) progress.classList.add('paused');
+      });
+      gallery.addEventListener('mouseleave', function() {
+        paused = false;
+        if (progress) progress.classList.remove('paused');
+      });
+
+      // Pause on touch (mobile) — same logic as click
+      gallery.addEventListener('touchstart', pauseAutoPlay, { passive: true });
+
+      // Pause when tab is hidden (saves battery, looks better on return)
+      document.addEventListener('visibilitychange', function() {
+        paused = document.hidden;
+        if (progress) {
+          if (document.hidden) progress.classList.add('paused');
+          else progress.classList.remove('paused');
+        }
+      });
+
+      // Start the loop
+      setInterval(tick, TICK_MS);
     })();
 
     // ANIMATED COUNTER — NOT LIVE DATA
